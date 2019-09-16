@@ -60,3 +60,13 @@ typings/
 
 # next.js build output
 .next
+
+### VisualStudioCode template
+.vscode/
+
+### Application
+dist/
+.idea/
+.rpt2_cache/
+.npmrc
+package-lock.json
