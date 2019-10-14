@@ -1,21 +1,22 @@
 {
   "name": "auth-toy",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "Auth Demo System",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node ./app",
-    "test": "set DEBUG=auth-toy:* & npm start"
+    "test": "jasmine"
   },
+  "repository": "https://github.com/lin826/auth-toy.git",
+  "author": "I-Ju <liniju@gapp.nthu.edu.tw>",
+  "license": "MIT",
+  "private": true,
   "dependencies": {
-    "@vip3/js-auth-sdk": "^0.5.3",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "helmet": "^3.21.0",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "oidc-provider": "^6.8.0",
-    "openid-client": "^3.7.2",
-    "pug": "^2.0.4"
+    "express": "^4.17.1",
+    "oidc-provider": "^6.12.5",
+    "openid-client": "^3.7.3"
+  },
+  "devDependencies": {
+    "jasmine": "^3.5.0",
+    "request": "^2.88.0"
   }
 }
