@@ -95,3 +95,6 @@ typings/
 ### Application
 .npmrc
 package-lock.json
+*.crt
+*.key
+*.pfx
