@@ -5,8 +5,19 @@ const { PORT = 3000, ISSUER = `http://localhost:${PORT}` } = process.env;
 
 const configuration = {
   // ... see available options /docs
+  features: {
+    clientCredentials: {
+      enabled: true
+    },
+  },
+  responseTypes: [
+    'code',
+    'id_token', 'id_token token',
+    'code id_token', 'code token', 'code id_token token',
+    'none',
+  ],
   clients: [{
-    client_id: 'foo',
+    client_id: 'code_foo',
     client_secret: 'bar',
     grant_types: ['refresh_token', 'authorization_code'],
     redirect_uris: ['https://127.0.0.1:8080/code_cb'],
@@ -17,33 +28,18 @@ const configuration = {
     client_id: 'implicit_foo',
     client_secret: '...',
     grant_types: ['implicit'],
-    response_types: ['id_token'],
+    response_types: ['id_token token'],
     redirect_uris: ['https://127.0.0.1:8080/implicit_cb'],
     client_name: 'foo has an implicit name',
     contacts: ['foo@implicit.com'],
     // + other client properties
   }, {
-    "grant_types": [
-        "implicit"
-    ],
-    "response_types": [
-        "id_token"
-    ],
-    "token_endpoint_auth_method": "none",
-    "application_type": "web",
-    "require_auth_time": false,
-    "subject_type": "public",
-    "introspection_endpoint_auth_method": "none",
-    "revocation_endpoint_auth_method": "none",
-    "backchannel_logout_session_required": false,
-    "frontchannel_logout_session_required": false,
-    "request_uris": [],
-    "tls_client_certificate_bound_access_tokens": false,
-    "client_id": "wd-1mWCwRIOrMyqpX-hBQ",
-    "redirect_uris": [
-        "https://127.0.0.1:8080/implicit_cb"
-    ],
-}],
+    client_id: 'credential_foo',
+    client_secret: 'secret',
+    grant_types: ['client_credentials', 'refresh_token'],
+    response_types: [],
+    redirect_uris: [],
+  }],
 };
 
 const provider = new Provider(ISSUER, configuration);
