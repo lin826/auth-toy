@@ -37,11 +37,13 @@ app.get('/credential_start', (_req, res) => {
   });
 });
 
+const code_verifier = generators.codeVerifier();
+const code_challenge = generators.codeChallenge(code_verifier);
 app.get('/code_start', (_req, res) => {
-  code_client.authorizationUrl({ scope: 'openid email profile offline', });
-
   const url = code_client.authorizationUrl({
-    scope: 'openid email profile offline',
+    scope: 'openid',
+    code_challenge_method: 'S256',
+    code_challenge: code_challenge,
   });
   console.log('Redirected to ', url);
   res.redirect(url);
@@ -49,7 +51,7 @@ app.get('/code_start', (_req, res) => {
 
 app.get('/code_cb', (req, res) => {
   const params = code_client.callbackParams(req);
-  code_client.callback(`${ISSUER}/code_cb`, params) // => Promise
+  code_client.callback(`${ISSUER}/code_cb`, params, { code_verifier }) // => Promise
   .then(function (tokenSet) {
     code_client.tokenSet = tokenSet;
     console.log(`Redirected to ${ISSUER}/code_userinfo`);
